@@ -5,3 +5,5 @@ A Java based web application utilizing SpringBoot, Hibernate, and MySQL database
 and meaningful user interactions. Responsive user profiles, homepages, and search capabilities allow users to 
 create pages, interact, and schedule play dates.
 
+APIs utilized:
+- Google Maps API
