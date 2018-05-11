@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https//www.thymeleaf.org/">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title th:text="${title}">Puppy Love</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/images.css" />
+</head>
+<body>
+
+<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div th:if="${sessionActive} == false" class="navbar-header">
+            <a th:href="@{/}" class="navbar-brand">Puppy Love</a>
+        </div>
+        <div th:if="${sessionActive} == true" class="navbar-header">
+            <a th:href="@{/home}" class="navbar-brand">Puppy Love</a>
+        </div>
+        <div th:if="${sessionActive} == false" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/authenticate}">Login</a></li>
+                <li><a th:href="@{/authenticate/register}">Register</a></li>
+            </ul>
+        </div>
+        <div th:if="${sessionActive} == true" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/home}">Home</a></li>
+                <li><a th:href="@{/puppy}">My Pups</a></li>
+                <li><a th:href="@{/home/viewprofile}">View Profile</a></li>
+                <li><a th:href="@{/home/editprofile}">Edit Profile</a></li>
+                <li><a th:href="@{/home/search}">Search</a></li>
+                <li><a th:href="@{/home/logout}">LogOut</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

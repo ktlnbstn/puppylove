@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<h1 th:text="${title}" style="padding-top:100px">Default Title</h1>
+
+<div th:replace="fragments :: page-header"></div>
+
+<form method="post">
+
+    <div th:each="puppy : ${puppies}" class="checkbox">
+        <input type="checkbox" name="puppyIds" th:value="${puppy.id}" th:id="${puppy.id}"/>
+        <label th:for="${puppy.id}" th:text="${puppy.name}"></label>
+        <br />
+    </div>
+
+    <input type="submit" value="Remove this Puppy" />
+</form>
+
+</body>
+</html>

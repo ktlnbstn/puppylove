@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}" style="padding-top:100px">Default Title</h1>
+
+<div th:replace="fragments :: page-header"></div>
+
+<form method="post" style="max-width:600px;" th:object="${puppy}" action="/puppy/view">
+
+    <table class="table">
+
+        <h1 th:text="*{name}"></h1>
+
+        <tr>
+            <th>Age: Month</th>
+            <th>Age: Year</th>
+            <th>Breed</th>
+            <th>Size</th>
+        </tr>
+
+        <tr>
+            <td th:text="*{ageMonth}"></td>
+            <td th:text="*{ageYear}"></td>
+            <td th:text="*{breed}"></td>
+            <td th:text="*{size}"></td>
+        </tr>
+
+    </table>
+
+</form>
+
+
+</body>
+</html>

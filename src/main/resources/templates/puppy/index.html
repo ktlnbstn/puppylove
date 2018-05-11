@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+
+<div th:replace="fragments :: page-header"></div>
+
+<hr />
+
+<p th:unless="${puppies} and ${puppies.size()}">no puppies :(</p>
+
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Age: Month</th>
+        <th>Age: Year</th>
+        <th>Breed</th>
+        <th>Size</th>
+    </tr>
+
+    <tr th:each="puppy : ${puppies}">
+        <td th:text="${puppy.name}"></td>
+        <td th:text="${puppy.ageMonth}"></td>
+        <td th:text="${puppy.ageYear}"></td>
+        <td th:text="${puppy.breed}"></td>
+        <td th:text="${puppy.size}"></td>
+    </tr>
+
+</table>
+
+<a th:href="@{/puppy/add}">Add Puppy</a> | <a th:href="@{/puppy/remove}">Remove Puppy</a>
+
+</body>
+</html>
