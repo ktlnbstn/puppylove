@@ -4,15 +4,16 @@
 
 <body class="container">
 
+<div th:replace="fragments :: page-header"></div>
+
 <h1 th:text="${title}" style="padding-top:100px">Default Title</h1>
 
 <form method="post" style="max-width:600px;" th:object="${searchForm}">
-    <select class="form-control" th:field="*{breed}">
+    <select class="form-control" th:field="*{location}">
         <option th:value="Seattle">Seattle</option>
         <option th:value="Renton">Renton</option>
         <option th:value="Bellevue">Bellevue</option>
         <option th:value="Redmond">Redmond</option>
-        <option th:value="Mercer Island">Mercer Island</option>
         <option th:value="Lynwood">Lynwood</option>
     </select>
     <input type="submit" value="Search" />
@@ -29,9 +30,10 @@
     </tr>
 
     <tr th:each="user : ${users}">
-        <td th:href="/home/viewprofile/{${user.id}}" th:text="${user.name}"></td>
+        <td th:text="${user.name}"></td>
         <td th:text="${user.age}"></td>
         <td th:text="${user.location}"></td>
+        //th:href="/home/viewprofile/{${user.id}}"
     </tr>
 </table>
 
