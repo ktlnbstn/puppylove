@@ -27,7 +27,6 @@ public class RegisterForm {
     @NotNull(message = "Passwords do not match")
     private String verifyPassword;
 
-    //TODO now on register and edit form, view then grab from front end for both forms
     @NotNull
     private DogParks dogParkLocation;
 

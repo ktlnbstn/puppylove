@@ -33,27 +33,22 @@ public class User {
     @Size(min = 0, max = 250)
     private String description;
 
-    //TODO remove location from anywhere and everywhere
     @NotNull
-    @Size(min = 0, max = 25)
-    private String location;
-
-    @NotNull
-    private DogParks dogParkLocations;
+    private DogParks dogParkLocation;
 
     public User() {
     }
 
-    public User(String name, int age, String email, String password, DogParks dogParkLocations) {
+    public User(String name, int age, String email, String password, DogParks dogParkLocation) {
         this.name = name;
         this.age = age;
         this.email = email;
         this.pwHash = hashPassword(password);
         this.description = "";
-        this.location = "";
-        this.dogParkLocations = dogParkLocations;
+        this.dogParkLocation = dogParkLocation;
     }
-    //TODO add users and to users
+
+    //TODO add users and to users (when creating the PlayDate feature)
 
     @OneToMany
     @JoinTable(name = "user_puppy",
@@ -73,14 +68,6 @@ public class User {
 
     public void setPlayDates(Set<PlayDate> playDates){
         this.playDates = playDates;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public Set<Puppy> getPuppies(){
@@ -143,12 +130,12 @@ public class User {
         this.puppies.remove(puppy);
     }
 
-    public DogParks getDogParkLocations() {
-        return dogParkLocations;
+    public DogParks getDogParkLocation() {
+        return dogParkLocation;
     }
 
-    public void setDogParkLocations(DogParks dogParkLocations) {
-        this.dogParkLocations = dogParkLocations;
+    public void setDogParkLocation(DogParks dogParkLocation) {
+        this.dogParkLocation = dogParkLocation;
     }
 }
 

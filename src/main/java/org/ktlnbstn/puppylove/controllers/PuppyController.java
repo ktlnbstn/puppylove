@@ -96,6 +96,7 @@ public class PuppyController extends AbstractController {
     }
 
     // View a puppy's profile
+    //TODO puppy breeds displays incorrectly. use that info to correct the location display (no want Denny_Park)
     @RequestMapping(value = "view/{puppyId}", method = RequestMethod.GET)
     public String viewPuppy(Model model, @PathVariable int puppyId,
                             HttpServletRequest request) {

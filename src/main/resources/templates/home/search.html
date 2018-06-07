@@ -8,14 +8,22 @@
 
 <h1 th:text="${title}" style="padding-top:100px">Default Title</h1>
 
-//TODO change the search location to search by dogpark
 <form method="post" style="max-width:600px;" th:object="${searchForm}">
-    <select class="form-control" th:field="*{location}">
-        <option th:value="Seattle">Seattle</option>
-        <option th:value="Renton">Renton</option>
-        <option th:value="Bellevue">Bellevue</option>
-        <option th:value="Redmond">Redmond</option>
-        <option th:value="Lynwood">Lynwood</option>
+    <select class="form-control" th:field="*{dogParkLocation}">
+        <option th:value="BLUE_DOG_POND">Blue Dog Pond</option>
+        <option th:value="DENNY_PARK">Denny Park</option>
+        <option th:value="DR_JOSE_RIZAL_PARK">Dr. Jose Rizal Park</option>
+        <option th:value="GENESEE_PARK">Genesee Park</option>
+        <option th:value="GOLDEN_GARDENS">Golden Gardens</option>
+        <option th:value="I5_COLONNADE">I-5 Colonnade</option>
+        <option th:value="KINNEAR_PARK">Kinnear Park</option>
+        <option th:value="MAGNOLIA_MANOR_PARK">Magnolia Manor Park</option>
+        <option th:value="MAGNUSON_PARK">Magnuson Park</option>
+        <option th:value="NORTHACRES_PARK">Northacres Park</option>
+        <option th:value="PLYMOUNTH_PILLARS">Plymouth Pillars</option>
+        <option th:value="REGRADE_PARK">Regrade Park</option>
+        <option th:value="WESTCREST_PARK">Westcrest Park</option>
+        <option th:value="WOODLAND_PARK">Woodland Park</option>
     </select>
     <input type="submit" value="Search" />
 </form>
@@ -27,13 +35,13 @@
     <tr>
         <th>Name</th>
         <th>Age</th>
-        <th>Location</th>
+        <th>Preferred Dog Park</th>
     </tr>
 
     <tr th:each="user : ${users}">
         <td th:text="${user.name}"></td>
         <td th:text="${user.age}"></td>
-        <td th:text="${user.location}"></td>
+        <td th:text="${user.dogParkLocation}"></td>
         //th:href="/home/viewprofile/{${user.id}}"
     </tr>
 </table>

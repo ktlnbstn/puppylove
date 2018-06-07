@@ -16,10 +16,7 @@ public class PlayDate {
     private int id;
 
     @NotNull
-    private String location;
-
-    @NotNull
-    private String dogPark;
+    private DogParks dogParkLocation;
 
     @NotNull
     private Date date;
@@ -38,20 +35,12 @@ public class PlayDate {
         return users;
     }
 
-    public String getLocation() {
-        return location;
+    public DogParks getDogParkLocation() {
+        return dogParkLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDogPark() {
-        return dogPark;
-    }
-
-    public void setDogPark(String dogPark) {
-        this.dogPark = dogPark;
+    public void setDogParkLocation(DogParks dogParkLocation) {
+        this.dogParkLocation = dogParkLocation;
     }
 
     public Date getDate() {

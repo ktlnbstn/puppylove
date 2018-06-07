@@ -66,7 +66,7 @@ public class HomeController extends AbstractController {
             return "home/search";
         }
 
-        model.addAttribute("users", userDao.findByLocation(searchForm.getLocation()));
+        model.addAttribute("users", userDao.findByDogParkLocation(searchForm.getDogParkLocation()));
 
         return "home/search";
     }
@@ -113,6 +113,7 @@ public class HomeController extends AbstractController {
         editForm.setName(user.getName());
         editForm.setEmail(user.getEmail());
         editForm.setDescription(user.getDescription());
+        editForm.setDogParkLocation(user.getDogParkLocation());
         model.addAttribute("editForm", editForm);
         return "home/editprofile";
     }
@@ -137,7 +138,7 @@ public class HomeController extends AbstractController {
         user.setName(tempUser.getName());
         user.setEmail(tempUser.getEmail());
         user.setDescription(tempUser.getDescription());
-        user.setDogParkLocations(tempUser.getDogParkLocation());
+        user.setDogParkLocation(tempUser.getDogParkLocation());
         userDao.save(user);
 
         return "redirect:";

@@ -1,6 +1,7 @@
 package org.ktlnbstn.puppylove.models.data;
 
 import org.hibernate.validator.internal.constraintvalidators.bv.size.SizeValidatorForArraysOfLong;
+import org.ktlnbstn.puppylove.models.DogParks;
 import org.ktlnbstn.puppylove.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,5 @@ public interface UserDao extends CrudRepository<User, Integer> {
 
     User findByEmail(String email);
 
-    //TODO change to find by dogpark plz
-    ArrayList<User> findByLocation(String location);
+    ArrayList<User> findByDogParkLocation(DogParks dogParkLocation);
 }
