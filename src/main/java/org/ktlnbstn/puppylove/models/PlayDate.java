@@ -22,7 +22,7 @@ public class PlayDate {
     private String dogPark;
 
     @NotNull
-    private Date playDate;
+    private Date date;
 
     @NotNull
     private String description;
@@ -30,30 +30,43 @@ public class PlayDate {
     @ManyToMany(mappedBy = "playDates")
     private Set<User> users;
 
-    public void setUsers(Set<User> users) { this.users = users; }
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
-    public Set<User> getUsers() { return users; }
+    public Set<User> getUsers() {
+        return users;
+    }
 
-    @ManyToMany(mappedBy = "playDates")
-    private Set<Puppy> puppies;
+    public String getLocation() {
+        return location;
+    }
 
-    public void setPuppies(Set<Puppy> puppies) { this.puppies = puppies; }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-    public Set<Puppy> getPuppies() { return puppies; }
+    public String getDogPark() {
+        return dogPark;
+    }
 
-    public String getLocation() { return location; }
+    public void setDogPark(String dogPark) {
+        this.dogPark = dogPark;
+    }
 
-    public void setLocation(String location) { this.location = location; }
+    public Date getDate() {
+        return date;
+    }
 
-    public String getDogPark() { return dogPark; }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-    public void setDogPark(String dogPark) { this.dogPark = dogPark; }
+    public String getDescription() {
+        return description;
+    }
 
-    public Date getPlayDate() { return playDate; }
-
-    public void setPlayDate(Date playDate) { this.playDate = playDate; }
-
-    public String getDescription() { return description; }
-
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

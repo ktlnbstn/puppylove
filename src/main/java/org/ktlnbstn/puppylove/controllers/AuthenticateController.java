@@ -56,7 +56,7 @@ public class AuthenticateController extends AbstractController {
             return "authenticate/register";
         }
 
-        User newUser = new User(registerForm.getName(), registerForm.getAge(), registerForm.getEmail(), registerForm.getPassword());
+        User newUser = new User(registerForm.getName(), registerForm.getAge(), registerForm.getEmail(), registerForm.getPassword(), registerForm.getDogParkLocation());
 
         userDao.save(newUser);
         setUserInSession(request.getSession(), newUser);

@@ -8,6 +8,7 @@
 
 <h1 th:text="${title}" style="padding-top:100px">Default Title</h1>
 
+//TODO change the search location to search by dogpark
 <form method="post" style="max-width:600px;" th:object="${searchForm}">
     <select class="form-control" th:field="*{location}">
         <option th:value="Seattle">Seattle</option>

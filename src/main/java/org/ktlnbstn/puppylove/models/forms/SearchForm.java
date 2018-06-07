@@ -3,6 +3,7 @@ package org.ktlnbstn.puppylove.models.forms;
 import javax.validation.constraints.NotNull;
 
 public class SearchForm {
+    //TODO allllll needs to be changed to findbydogpark
 
     @NotNull
     private String location;

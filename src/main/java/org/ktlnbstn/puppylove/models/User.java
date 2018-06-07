@@ -12,68 +12,80 @@ public class User {
 
     @Id
     @GeneratedValue
-    int id;
+    private int id;
 
     @NotNull
     @Size(min = 2, max = 25, message = "Name must be between 2 and 25 characters")
-    String name;
+    private String name;
 
     @Email
     @Size(min = 1, message = "Invalid email")
-    String email;
+    private String email;
 
     @NotNull
     private String pwHash;
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @NotNull
-    int age;
+    private int age;
 
     @NotNull
     @Size(min = 0, max = 250)
-    String description;
+    private String description;
 
+    //TODO remove location from anywhere and everywhere
     @NotNull
     @Size(min = 0, max = 25)
-    String location;
+    private String location;
+
+    @NotNull
+    private DogParks dogParkLocations;
 
     public User() {
     }
 
-    public User(String name, int age, String email, String password) {
+    public User(String name, int age, String email, String password, DogParks dogParkLocations) {
         this.name = name;
         this.age = age;
         this.email = email;
         this.pwHash = hashPassword(password);
         this.description = "";
         this.location = "";
+        this.dogParkLocations = dogParkLocations;
     }
+    //TODO add users and to users
 
     @OneToMany
     @JoinTable(name = "user_puppy",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "puppy_id", referencedColumnName = "id"))
-
     private Set<Puppy> puppies;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_playdate",
             joinColumns =  @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "playdate_id", referencedColumnName = "id"))
-
     private Set<PlayDate> playDates;
 
-    public Set<PlayDate> getPlayDates(){ return playDates; }
+    public Set<PlayDate> getPlayDates(){
+        return playDates;
+    }
 
     public void setPlayDates(Set<PlayDate> playDates){
         this.playDates = playDates;
     }
 
-    public String getLocation() { return location; }
+    public String getLocation() {
+        return location;
+    }
 
-    public void setLocation(String location) { this.location = location; }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-    public Set<Puppy> getPuppies(){ return this.puppies; }
+    public Set<Puppy> getPuppies(){
+        return this.puppies;
+    }
 
     public void setPuppies(Set<Puppy> puppies) {
         this.puppies = puppies;
@@ -129,6 +141,14 @@ public class User {
 
     public void removePuppy(Puppy puppy) {
         this.puppies.remove(puppy);
+    }
+
+    public DogParks getDogParkLocations() {
+        return dogParkLocations;
+    }
+
+    public void setDogParkLocations(DogParks dogParkLocations) {
+        this.dogParkLocations = dogParkLocations;
     }
 }
 

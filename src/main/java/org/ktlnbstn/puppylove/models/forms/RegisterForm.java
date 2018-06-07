@@ -1,6 +1,7 @@
 package org.ktlnbstn.puppylove.models.forms;
 
 import org.hibernate.validator.constraints.Email;
+import org.ktlnbstn.puppylove.models.DogParks;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -9,7 +10,7 @@ import javax.validation.constraints.Size;
 public class RegisterForm {
 
     @Email(message = "Not a valid email address")
-    @Size(min = 1, message = "Must be a vaild email address")
+    @Size(min = 1, message = "Must be a valid email address")
     private String email;
 
     @NotNull
@@ -26,9 +27,15 @@ public class RegisterForm {
     @NotNull(message = "Passwords do not match")
     private String verifyPassword;
 
+    //TODO now on register and edit form, view then grab from front end for both forms
+    @NotNull
+    private DogParks dogParkLocation;
+
     public RegisterForm() {}
 
-    public String getVerifyPassword() { return verifyPassword; }
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
 
     public void setVerifyPassword(String verifyPassword) {
         this.verifyPassword = verifyPassword;
@@ -41,15 +48,21 @@ public class RegisterForm {
         }
     }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getName(){ return name; }
+    public String getName(){
+        return name;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -59,7 +72,19 @@ public class RegisterForm {
         this.email = email;
     }
 
-    public int getAge() { return age; }
+    public int getAge() {
+        return age;
+    }
 
-    public void setAge(int age) { this.age = age; }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public DogParks getDogParkLocation() {
+        return dogParkLocation;
+    }
+
+    public void setDogParkLocation(DogParks dogParkLocation) {
+        this.dogParkLocation = dogParkLocation;
+    }
 }

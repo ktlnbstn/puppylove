@@ -14,5 +14,6 @@ public interface UserDao extends CrudRepository<User, Integer> {
 
     User findByEmail(String email);
 
+    //TODO change to find by dogpark plz
     ArrayList<User> findByLocation(String location);
 }

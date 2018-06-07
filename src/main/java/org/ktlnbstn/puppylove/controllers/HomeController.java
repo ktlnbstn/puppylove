@@ -137,6 +137,7 @@ public class HomeController extends AbstractController {
         user.setName(tempUser.getName());
         user.setEmail(tempUser.getEmail());
         user.setDescription(tempUser.getDescription());
+        user.setDogParkLocations(tempUser.getDogParkLocation());
         userDao.save(user);
 
         return "redirect:";

@@ -1,6 +1,7 @@
 package org.ktlnbstn.puppylove.models.forms;
 
 import org.hibernate.validator.constraints.Email;
+import org.ktlnbstn.puppylove.models.DogParks;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -9,7 +10,7 @@ import javax.validation.constraints.Size;
 public class EditForm {
 
     @Email(message = "Not a valid email address")
-    @Size(min = 1, message = "Must be a vaild email address")
+    @Size(min = 1, message = "Must be a valid email address")
     private String email;
 
     @NotNull
@@ -19,6 +20,9 @@ public class EditForm {
     @NotNull
     @Size(min = 0, max = 250)
     String description;
+
+    @NotNull
+    private DogParks dogParkLocation;
 
     public String getEmail() {
         return email;
@@ -42,5 +46,13 @@ public class EditForm {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public DogParks getDogParkLocation() {
+        return dogParkLocation;
+    }
+
+    public void setDogParkLocation(DogParks dogParkLocation) {
+        this.dogParkLocation = dogParkLocation;
     }
 }

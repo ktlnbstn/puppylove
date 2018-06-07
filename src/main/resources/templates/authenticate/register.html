@@ -34,6 +34,25 @@
         </select>
     </div>
     <div class="form-group">
+        <label th:for="dogParkLocation">Dog Parks:</label>
+        <select class="form-control" th:field="*{dogParkLocation}">
+            <option th:value="BLUE_DOG_POND">Blue Dog Pond</option>
+            <option th:value="DENNY_PARK">Denny Park</option>
+            <option th:value="DR_JOSE_RIZAL_PARK">Dr. Jose Rizal Park</option>
+            <option th:value="GENESEE_PARK">Genesee Park</option>
+            <option th:value="GOLDEN_GARDENS">Golden Gardens</option>
+            <option th:value="I5_COLONNADE">I-5 Colonnade</option>
+            <option th:value="KINNEAR_PARK">Kinnear Park</option>
+            <option th:value="MAGNOLIA_MANOR_PARK">Magnolia Manor Park</option>
+            <option th:value="MAGNUSON_PARK">Magnuson Park</option>
+            <option th:value="NORTHACRES_PARK">Northacres Park</option>
+            <option th:value="PLYMOUNTH_PILLARS">Plymouth Pillars</option>
+            <option th:value="REGRADE_PARK">Regrade Park</option>
+            <option th:value="WESTCREST_PARK">Westcrest Park</option>
+            <option th:value="WOODLAND_PARK">Woodland Park</option>
+        </select>
+    </div>
+    <div class="form-group">
         <label th:for="password">Password</label>
         <input th:field="*{password}" type="password" />
         <div th:errors="*{password}" class="error"></div>

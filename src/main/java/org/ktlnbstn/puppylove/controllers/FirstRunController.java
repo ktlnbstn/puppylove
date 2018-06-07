@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 
-@Controller
-@RequestMapping("")
+//@Controller UNCOMMENT IF DESIRE
+//@RequestMapping("") ALSO THIS
 public class FirstRunController extends AbstractController {
 
     @RequestMapping(value = "")
