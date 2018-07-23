@@ -10,7 +10,6 @@ create pages, interact, and schedule play dates.
 <ul>
 	<li>Minimum Viable Product - Homepage, User Profile page, Puppy Profile Page, Add/Remove Puppy, Search for Users, 
 		Playdate Messaging</li>
-
 	<li>Authentication Controller - User Login </li>
 </ul></br>
 
@@ -18,13 +17,9 @@ create pages, interact, and schedule play dates.
 
 <ul>
 	<li>Image Uploading - User and Puppy Profile Photos</li>
-
 	<li>Google Map - Dog Park Location Map Views</li>
-	
 	<li>Detailed Puppy Profile</li>
-	
-	<li>Homepage with 'Puppies Near Me' Photos</li>
-
+	<li>Homepage with 'Puppies Near Me' Photos</li
 	<li>Enhanced Front-End Views</li>
 </ul></br>
 
@@ -32,10 +27,7 @@ create pages, interact, and schedule play dates.
 
 <ul>
 	<li>Shoutout Feature - 'Join Me!'</li>
-
 	<li>Detailed Dog Park Profiles</li>
-
 	<li>Dog Walker Profiles</li>
-	
 	<li>Dog Friendly Neighborhood Bars and Restaurants</li>
 </ul></br>
