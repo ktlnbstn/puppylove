@@ -6,27 +6,65 @@
 
 <div th:replace="fragments :: page-header"></div>
 
-<h2 th:text="${profile}"></h2>
+<center><h2 th:text="${user.name}"></h2></center>
 
-<h2 th:text="${user.name}"></h2>
-<p th:text="${user.age}"></p>
-<p th:text="${user.dogParkLocation}"></p>
-<p th:text="${user.description}"></p>
+    <label>Age:</label><p th:text="${user.age}"></p>
 
-<hr />
+    <label>Favorite Dog Park:</label><p th:text="${user.dogParkLocation}"></p>
 
-<div class="row">
+    <label>About Me:</label>
+        <p th:text="${user.description}"></p>
 
-    <div class="col-md-8">
-        <p th:unless="${puppies} and ${puppies.size()}">no puppies :(</p>
-        <table class="table">
-            <tr th:each="puppy : ${puppies}">
-                <td th:text="${puppy.name}"></td>
-                <td th:text="${puppy.ageYear}"></td>
-            </tr>
-        </table>
+
+    <div th:switch="${userId}">
+        <p th:case="${currentUserId}"></p>
+        <p th:case="${userId}"><h4><a th:href="@{/playdate/add/{userId}(userId=${userId})}">
+            Schedule a Playdate!</a></h4></p>
     </div>
-</div>
+
+<label><h2>My Puppies</h2></label>
+
+<p th:unless="${puppies} and ${puppies.size()}">No puppies added.</p>
+
+    <table class="table">
+
+        <tr>
+            <th>Name</th>
+            <th>Birthday</th>
+            <th>Breed</th>
+            <th>Description</th>
+        </tr>
+
+        <tr th:each="puppy : ${puppies}">
+            <td th:text="${puppy.name}"></td>
+            <td th:text="${#dates.format(puppy.birthday, 'MM/dd/yyyy')}"></td>
+            <td th:text="${puppy.breed}"></td>
+            <td th:text="${puppy.description}"></td>
+        </tr>
+
+    </table>
+
+<label><h2>My Past Playdates</h2></label>
+
+    <p th:unless="${pastPlaydates} and ${pastPlaydates.size()}">No past playdates scheduled.</p>
+
+        <table class="table">
+
+            <tr>
+                <th>Date and Time</th>
+                <th>Location</th>
+                <th colspan="2">Participants</th>
+                <th>Message</th>
+            </tr>
+
+            <tr th:each="pastPlaydate : ${pastPlaydates}">
+                <td th:text="${#dates.format(pastPlaydate.date, 'MM/dd/yyyy, hh:mm a')}"></td>
+                <td th:text="${pastPlaydate.dogParkLocation}"></td>
+                <td th:each="user : ${pastPlaydate.users}" th:text="${user.name}"></td>
+                <td th:text="${pastPlaydate.description}"></td>
+            </tr>
+
+        </table>
 
 </body>
 </html>

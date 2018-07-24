@@ -9,30 +9,37 @@
 </head>
 <body>
 
-<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
+<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top" >
+
     <div class="container">
+
         <div th:if="${sessionActive} == false" class="navbar-header">
             <a th:href="@{/}" class="navbar-brand">Puppy Love</a>
         </div>
+
+        <!--TODO LATER make this link show a public homepage with views of other puppies on the site-->
+
         <div th:if="${sessionActive} == true" class="navbar-header">
             <a th:href="@{/home}" class="navbar-brand">Puppy Love</a>
         </div>
+
         <div th:if="${sessionActive} == false" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/authenticate}">Login</a></li>
                 <li><a th:href="@{/authenticate/register}">Register</a></li>
             </ul>
         </div>
+
         <div th:if="${sessionActive} == true" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" >
                 <li><a th:href="@{/home}">Home</a></li>
-                <li><a th:href="@{/puppy}">My Pups</a></li>
-                <li><a th:href="@{/home/viewprofile}">View Profile</a></li>
+                <li><a th:href="@{/home/viewprofile/{uid}(uid=${userId})}" >View Public Profile</a></li>
                 <li><a th:href="@{/home/editprofile}">Edit Profile</a></li>
                 <li><a th:href="@{/home/search}">Search</a></li>
-                <li><a th:href="@{/home/logout}">LogOut</a></li>
+                <li><a th:href="@{/home/logout}">Log Out</a></li>
             </ul>
         </div>
+
     </div>
 </div>
 

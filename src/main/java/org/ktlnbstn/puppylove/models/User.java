@@ -3,6 +3,8 @@ package org.ktlnbstn.puppylove.models;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
@@ -27,10 +29,12 @@ public class User {
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @NotNull
+    @Max(value=99, message = "Please enter an age between 18-99")
+    @Min(value=18, message = "Please enter an age between 18-99")
     private int age;
 
     @NotNull
-    @Size(min = 0, max = 250)
+    @Size(min = 0, max = 250, message = "Description cannot exceed 250 characters.")
     private String description;
 
     @NotNull
@@ -48,8 +52,6 @@ public class User {
         this.dogParkLocation = dogParkLocation;
     }
 
-    //TODO add users and to users (when creating the PlayDate feature)
-
     @OneToMany
     @JoinTable(name = "user_puppy",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -60,14 +62,18 @@ public class User {
     @JoinTable(name = "user_playdate",
             joinColumns =  @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "playdate_id", referencedColumnName = "id"))
-    private Set<PlayDate> playDates;
+    private Set<PlayDate> playdates = new TreeSet<>();
 
-    public Set<PlayDate> getPlayDates(){
-        return playDates;
+    public Set<PlayDate> getPlaydates(){
+        return playdates;
     }
 
-    public void setPlayDates(Set<PlayDate> playDates){
-        this.playDates = playDates;
+    public void addPlaydate(PlayDate playdate) {
+        this.playdates.add(playdate);
+    }
+
+    public void setPlaydates(Set<PlayDate> playdates){
+        this.playdates = playdates;
     }
 
     public Set<Puppy> getPuppies(){
@@ -137,5 +143,6 @@ public class User {
     public void setDogParkLocation(DogParks dogParkLocation) {
         this.dogParkLocation = dogParkLocation;
     }
+
 }
 

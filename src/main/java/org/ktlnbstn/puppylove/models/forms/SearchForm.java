@@ -12,4 +12,5 @@ public class SearchForm {
     public DogParks getDogParkLocation() { return dogParkLocation; }
 
     public void setDogParkLocation(DogParks dogParkLocation) { this.dogParkLocation = dogParkLocation; }
+
 }

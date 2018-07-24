@@ -1,51 +1,76 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https//www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
 <body class="container">
 
 <div th:replace="fragments :: page-header"></div>
 
-<h1 th:text="${title}" style="padding-top:100px">Default Title</h1>
+<center><h1 th:text="${title}" style="padding-top:100px">Default Title</h1></center>
+
+<div style='float:left'>
+
+    <iframe
+            width="400"
+            height="400"
+            align="left"
+            zoom="0.75"
+            frameborder="1" style="border:0"
+            src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCQvzvB-fj-aayJq_AQLb4VARQmbxt_JUc
+                &amp;q=dog+parks+in+Seattle" allowfullscreen="true">
+    </iframe>
+
+</div>
+
+<div style='float:left'>
 
 <form method="post" style="max-width:600px;" th:object="${searchForm}">
-    <select class="form-control" th:field="*{dogParkLocation}">
-        <option th:value="BLUE_DOG_POND">Blue Dog Pond</option>
+
+    <label>Select A Dog Park: </label>
+
+    <select th:field="*{dogParkLocation}">
+        <option th:value="BLUE_DOG_POND">Blue Dog Park</option>
         <option th:value="DENNY_PARK">Denny Park</option>
         <option th:value="DR_JOSE_RIZAL_PARK">Dr. Jose Rizal Park</option>
         <option th:value="GENESEE_PARK">Genesee Park</option>
         <option th:value="GOLDEN_GARDENS">Golden Gardens</option>
-        <option th:value="I5_COLONNADE">I-5 Colonnade</option>
+        <option th:value="I5_COLONNADE">I5 Colonnade</option>
         <option th:value="KINNEAR_PARK">Kinnear Park</option>
         <option th:value="MAGNOLIA_MANOR_PARK">Magnolia Manor Park</option>
         <option th:value="MAGNUSON_PARK">Magnuson Park</option>
         <option th:value="NORTHACRES_PARK">Northacres Park</option>
-        <option th:value="PLYMOUNTH_PILLARS">Plymouth Pillars</option>
+        <option th:value="PLYMOUTH_PILLARS">Plymouth Pillars</option>
         <option th:value="REGRADE_PARK">Regrade Park</option>
         <option th:value="WESTCREST_PARK">Westcrest Park</option>
         <option th:value="WOODLAND_PARK">Woodland Park</option>
+        <option th:value="ALL">All Puppy Owners</option>
     </select>
+
     <input type="submit" value="Search" />
+
 </form>
 
-<hr />
+    <p th:unless="${users} and ${users.size()}">No puppy owners at this park.</p>
 
-<table class="table">
+        <table class="table" style="width:100%">
 
-    <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Preferred Dog Park</th>
-    </tr>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Preferred Dog Park</th>
+                <th>Puppies</th>
+                <th>Profile</th>
+            </tr>
 
-    <tr th:each="user : ${users}">
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.age}"></td>
-        <td th:text="${user.dogParkLocation}"></td>
-        //th:href="/home/viewprofile/{${user.id}}"
-    </tr>
-</table>
+            <tr th:each="invitee : ${users}">
+                <td th:text="${invitee.name}"></td>
+                <td th:text="${invitee.age}"></td>
+                <td th:text="${invitee.dogParkLocation}"></td>
+                <td><div th:each="puppy : ${invitee.puppies}" th:text="${puppy.name}"></div></td>
+                <td><a th:href="@{/home/viewprofile/{uid}(uid=${invitee.id})}">View</a></td>
+            </tr>
 
+        </table>
+</div>
 
 </body>
 </html>

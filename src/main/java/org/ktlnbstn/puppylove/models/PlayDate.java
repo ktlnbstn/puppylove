@@ -1,15 +1,14 @@
 package org.ktlnbstn.puppylove.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.Set;
+import javax.validation.constraints.Size;
+import java.util.*;
 
 @Entity
-public class PlayDate {
+public class PlayDate implements Comparable<PlayDate>{
 
     @Id
     @GeneratedValue
@@ -19,20 +18,53 @@ public class PlayDate {
     private DogParks dogParkLocation;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date date;
 
     @NotNull
+    @Size(min = 2, message = "Please provide a message.")
     private String description;
 
-    @ManyToMany(mappedBy = "playDates")
-    private Set<User> users;
+    @ManyToMany(mappedBy="playdates")
+    @OrderColumn
+    private Set<User> users = new HashSet<>();
+
+    public PlayDate(int id, DogParks dogParkLocation, Date date, String description, Set<User> users) {
+        this.id = id;
+        this.dogParkLocation = dogParkLocation;
+        this.date = date;
+        this.description = description;
+        this.users = users;
+    }
+
+    public PlayDate() {
+    }
+
+    @Override
+    public int compareTo(PlayDate o) {
+        if (this.date.compareTo(o.date) > 0) {
+            return 1;
+        } else if (this.date.compareTo(o.date) < 0) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
 
     public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public DogParks getDogParkLocation() {

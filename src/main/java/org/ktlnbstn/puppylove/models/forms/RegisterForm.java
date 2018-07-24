@@ -9,22 +9,22 @@ import javax.validation.constraints.Size;
 
 public class RegisterForm {
 
-    @Email(message = "Not a valid email address")
-    @Size(min = 1, message = "Must be a valid email address")
+    @Email(message = "Not a valid email address.")
+    @Size(min = 1, message = "Must be a valid email address.")
     private String email;
 
     @NotNull
-    @Size(min = 2, max = 30, message = "Invalid name")
+    @Size(min = 2, max = 30, message = "Name must be between 2 - 30 characters.")
     private String name;
 
     @NotNull
     private int age;
 
     @NotNull
-    @Pattern(regexp = "(\\S){4,20}", message = "Password must have 4-20 characters")
+    @Pattern(regexp = "(\\S){4,20}", message = "Password must be between 4 - 20 characters.")
     private String password;
 
-    @NotNull(message = "Passwords do not match")
+    @NotNull(message = "Passwords do not match.")
     private String verifyPassword;
 
     @NotNull

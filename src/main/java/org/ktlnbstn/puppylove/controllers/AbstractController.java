@@ -1,6 +1,7 @@
 package org.ktlnbstn.puppylove.controllers;
 
 import org.ktlnbstn.puppylove.models.User;
+import org.ktlnbstn.puppylove.models.data.PlayDateDao;
 import org.ktlnbstn.puppylove.models.data.PuppyDao;
 import org.ktlnbstn.puppylove.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,11 @@ public class AbstractController {
     @Autowired
     protected PuppyDao puppyDao;
 
+    @Autowired
+    protected PlayDateDao playDateDao;
+
     public static final String userSessionKey = "user_id";
+    public static final String playDateKey = "playDate_id";
 
     protected User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
