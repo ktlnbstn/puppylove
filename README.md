@@ -5,7 +5,7 @@ A Java based web application utilizing SpringBoot, Hibernate, and MySQL database
 and meaningful user interactions. Responsive user profiles, homepages, and search capabilities allow users to 
 create pages, interact, and schedule play dates.
 
-<hh3><em>Phase 1 (April 2018 - Present)</em></h3></br>
+<hh3><em>Phase 1 (May 2018 - July 2018)</em></h3></br>
 
 <ul>
 	<li>Minimum Viable Product - Homepage, User Profile page, Puppy Profile Page, Add/Remove Puppy, Search for Users, 
@@ -14,7 +14,7 @@ create pages, interact, and schedule play dates.
 	<li>Google Map - Dog Park Location Map Views</li>
 </ul></br>
 
-<hh3><em>Phase 2</em></h3></br>
+<hh3><em>Phase 2 (July 2018 - Present)</em></h3></br>
 
 <ul>
 	<li>Image Uploading - User and Puppy Profile Photos</li>
