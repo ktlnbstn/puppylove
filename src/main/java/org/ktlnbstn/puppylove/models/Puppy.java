@@ -1,9 +1,11 @@
 package org.ktlnbstn.puppylove.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.Date;
 
 @Entity
 public class Puppy {
@@ -13,18 +15,15 @@ public class Puppy {
     private int id;
 
     @NotNull
-    @Size(min=2, max=15)
+    @Size(min=2, max=15, message = "Name must be between 2 - 15 characters.")
     private String name;
 
     @NotNull
-    @Size(min=2, max=15)
-    private String breed;
+    private DogBreeds breed;
 
     @NotNull
-    private String ageMonth;
-
-    @NotNull
-    private int ageYear;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
 
     @NotNull
     @Size(min=2, max=15)
@@ -33,92 +32,72 @@ public class Puppy {
     @ManyToOne
     private User user;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "puppy_playdate",
-            joinColumns =  @JoinColumn(name = "puppy_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "playdate_id", referencedColumnName = "id"))
-    private Set<PlayDate> playDates;
+    @NotNull
+    @Size(min=0, max=250, message = "Description must be between 0 - 250 characters.")
+    private String description;
 
-    public Set<PlayDate> getPlayDates(){ return playDates; }
-
-    public void setPlayDates(Set<PlayDate> playDates){ this.playDates = playDates; }
-
-    public Puppy(String name, String breed, String ageMonth, int ageYear, String size, User user) {
+    public Puppy(String name, DogBreeds breed, Date birthday, String size, User user, String description) {
         this.name = name;
         this.breed = breed;
-        this.ageMonth = ageMonth;
-        this.ageYear = ageYear;
+        this.birthday = birthday;
         this.size = size;
         this.user = user;
+        this.description = description;
     }
 
     public Puppy() { }
 
     public int getId() {
-
         return id;
     }
 
     public String getName() {
-
         return name;
     }
 
     public void setName(String name) {
-
         this.name = name;
     }
 
-    public String getAgeMonth() {
-
-        return ageMonth;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setAgeMonth(String ageMonth) {
-
-        this.ageMonth = ageMonth;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
-    public int getAgeYear() {
-
-        return ageYear;
-    }
-
-    public void setAgeYear(int ageYear) {
-
-        this.ageYear = ageYear;
-    }
-
-    public String getBreed() {
-
+    public DogBreeds getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
-
+    public void setBreed(DogBreeds breed) {
         this.breed = breed;
     }
 
     public String getSize() {
-
         return size;
     }
 
     public void setSize(String size) {
-
         this.size = size;
     }
 
     public User getUser() {
-
         return user;
     }
 
     public void setUser(User user) {
-
         this.user = user;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
 
 

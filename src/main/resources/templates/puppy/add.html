@@ -3,85 +3,59 @@
 <head th:replace="fragments :: head"></head>
 <body class="container">
 
-<h1 th:text="${title}" style="padding-top:100px">Default Title</h1>
+<center><h1 th:text="${title}" style="padding-top:100px">Default Title</h1></center>
 
 <div th:replace="fragments :: page-header"></div>
-
 
 <form method="post" style="max-width:600px;" th:object="${puppy}">
 
     <div class="form-group">
-        <label th:for="name">Name</label>
+        <label th:for="name">Name: </label>
         <input class="form-control" th:field="*{name}" />
-        <span th:errors="*{name}" class="error"></span>
+        <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}">Incorrect Name</div>
     </div>
 
     <div class="form-group">
-        <label th:for="ageMonth">Month</label>
-        <select class="form-control" th:field="*{ageMonth}">
-            <option th:value="January">January</option>
-            <option th:value="February">February</option>
-            <option th:value="March">March</option>
-            <option th:value="April">April</option>
-            <option th:value="May">May</option>
-            <option th:value="June">June</option>
-            <option th:value="July">July</option>
-            <option th:value="August">August</option>
-            <option th:value="September">September</option>
-            <option th:value="October">October</option>
-            <option th:value="November">November</option>
-            <option th:value="December">December</option>
-        </select>
+        <label th:for="birthday">Birthday: </label>
+        <input class="form-control" type="date" value="MM/DD/YYYY" min="2001-07-20" max="2018-12-31"
+               th:field="*{birthday}" th:text="${birthday}"/>
+        <div th:if="${#fields.hasErrors('birthday')}" class="error" th:errors="*{birthday}">Incorrect Birthday</div>
     </div>
 
     <div class="form-group">
-    <label th:for="ageYear">Year</label>
-        <select class="form-control" th:field="*{ageYear}">
-            <option th:value="2017">2017</option>
-            <option th:value="2016">2016</option>
-            <option th:value="2015">2015</option>
-            <option th:value="2014">2014</option>
-            <option th:value="2013">2013</option>
-            <option th:value="2012">2012</option>
-            <option th:value="2011">2011</option>
-            <option th:value="2010">2010</option>
-            <option th:value="2009">2009</option>
-            <option th:value="2008">2008</option>
-            <option th:value="2007">2007</option>
-            <option th:value="2006">2006</option>
-            <option th:value="2005">2005</option>
-            <option th:value="2004">2004</option>
-            <option th:value="2003">2003</option>
-            <option th:value="2002">2002</option>
-            <option th:value="2001">2001</option>
-            <option th:value="2000">2000</option>
-            <option th:value="1999">1999</option>
-            <option th:value="1998">1998</option>
-            <option th:value="1997">1997</option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <label th:for="breed">Breed</label>
+        <label th:for="breed">Breed: </label>
         <select class="form-control" th:field="*{breed}">
-            <option th:value="Corgi">Corgi</option>
-            <option th:value="Mutt">Mutt</option>
-            <option th:value="Pitbull">Pitbull</option>
-            <option th:value="Poodle">Poodle</option>
-            <option th:value="Husky">Husky</option>
-            <option th:value="German_Shepard">German Shepard</option>
-            <option th:value="Pug">Pug</option>
-            <option th:value="Lab">Lab</option>
-            <option th:value="Retriever">Retriever</option>
-            <option th:value="Chowchow">Chowchow</option>
-            <option th:value="Akita">Akita</option>
-            <option th:value="Chihuahua">Chihuahua</option>
-            <option th:value="Other">Other</option>
+            <option th:value="AKITA">Akita</option>
+            <option th:value="AUSTRALIAN_SHEPARD">Australian Shepard</option>
+            <option th:value="BEAGLE">Beagle</option>
+            <option th:value="BOXER">Boxer</option>
+            <option th:value="BULLDOG">Bulldog</option>
+            <option th:value="CHIHUAHUA">Chihuahua</option>
+            <option th:value="CHOW_CHOW">Chow Chow</option>
+            <option th:value="DACHSHUND">Dachshund</option>
+            <option th:value="FRENCH_BULLDOG">French Bulldog</option>
+            <option th:value="GERMAN_SHEPARD">German Shepard</option>
+            <option th:value="GREAT_DANE">Great Dane</option>
+            <option th:value="MIXED_MUTT">Mixed/Mutt</option>
+            <option th:value="PITBULL">Pitbull</option>
+            <option th:value="POINTER">Pointer</option>
+            <option th:value="POMERANIAN">Pomeranian</option>
+            <option th:value="POODLE">Poodle</option>
+            <option th:value="PUG">Pug</option>
+            <option th:value="LABRADOR">Retriever - Labrador</option>
+            <option th:value="GOLDEN">Retriever - Golden</option>
+            <option th:value="ROTTWEILER">Rottweiler</option>
+            <option th:value="SAMOYED">Samoyed</option>
+            <option th:value="SIBERIAN_HUSKY">Siberian Husky</option>
+            <option th:value="SHIH_TZU">Shih Tzu</option>
+            <option th:value="WELSH_CORGI">Welsh Corgi</option>
+            <option th:value="YORKSHIRE_TERRIER">Yorkshire Terrier</option>
+            <option th:value="OTHER">Other</option>
         </select>
     </div>
 
     <div class="form-group">
-        <label th:for="size">Size</label>
+        <label th:for="size">Size: </label>
         <select class="form-control" th:field="*{size}">
             <option th:value="Small">Small (less than 15 lbs)</option>
             <option th:value="Medium">Medium (16-35 lbs)</option>
@@ -89,8 +63,16 @@
         </select>
     </div>
 
+    <div class="form-group">
+        <label th:for="description">Description: </label>
+        <p><textarea name="message" rows="10" cols="30" th:field="*{description}"></textarea></p>
+        <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">
+            Incorrect Description</div>
+    </div>
+
     <input type="hidden" th:value="${puppy.id}" name="puppyId" />
     <input type="submit" value="Add Puppy" />
+
 </form>
 
 </body>

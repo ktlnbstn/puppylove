@@ -5,6 +5,7 @@ import org.ktlnbstn.puppylove.models.forms.LoginForm;
 import org.ktlnbstn.puppylove.models.forms.RegisterForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +21,18 @@ public class AuthenticateController extends AbstractController {
     //Displays Login Page
     @RequestMapping(value= "", method = RequestMethod.GET)
     public String displayLoginPage(Model model, HttpServletRequest request){
+
         model.addAttribute("sessionActive", isSessionActive(request.getSession()));
         model.addAttribute("title", "Login");
         model.addAttribute("loginForm", new LoginForm());
+
         return "authenticate/login";
     }
 
     //Displays Register Page
     @RequestMapping(value="register", method = RequestMethod.GET)
     public String displayRegisterForm(Model model, HttpServletRequest request){
+
         model.addAttribute("sessionActive", isSessionActive(request.getSession()));
         model.addAttribute("title", "Register");
         model.addAttribute("registerForm", new RegisterForm());
@@ -38,25 +42,32 @@ public class AuthenticateController extends AbstractController {
 
     //Processes Register Form and validates user input
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String processRegisterForm(@ModelAttribute @Valid RegisterForm registerForm, Errors errors, HttpServletRequest request, Model model) {
+    public String processRegisterForm(@Valid @ModelAttribute("registerForm") RegisterForm registerForm,
+                                      BindingResult errors, HttpServletRequest request, Model model) {
 
         if (errors.hasErrors()) {
+
             model.addAttribute("title", "Register");
             model.addAttribute("sessionActive", isSessionActive(request.getSession()));
+            model.addAttribute("registerForm", registerForm);
+
             return "authenticate/register";
         }
 
         User existingUser = userDao.findByEmail(registerForm.getEmail());
 
         if (existingUser != null) {
-            errors.rejectValue("username", "email.alreadyexists", "A user with that email already exists");
+
             model.addAttribute("title", "Register");
             model.addAttribute("sessionActive", isSessionActive(request.getSession()));
-            model.addAttribute("existingError", "User already exists.");
+            model.addAttribute("registerForm", "registerForm");
+            model.addAttribute("existingError", "Email already registered.");
+
             return "authenticate/register";
         }
 
-        User newUser = new User(registerForm.getName(), registerForm.getAge(), registerForm.getEmail(), registerForm.getPassword());
+        User newUser = new User(registerForm.getName(), registerForm.getAge(), registerForm.getEmail(),
+                registerForm.getPassword(), registerForm.getDogParkLocation());
 
         userDao.save(newUser);
         setUserInSession(request.getSession(), newUser);
@@ -66,10 +77,13 @@ public class AuthenticateController extends AbstractController {
 
     //Processes Login Form and validates user input
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public String processLoginForm(@ModelAttribute @Valid LoginForm loginForm, Errors errors, HttpServletRequest request, Model model) {
+    public String processLoginForm(@ModelAttribute @Valid LoginForm loginForm, Errors errors,
+                                   HttpServletRequest request, Model model) {
 
         if (errors.hasErrors()) {
+
             model.addAttribute("title", "Login");
+
             return "authenticate/login";
         }
 
@@ -77,16 +91,21 @@ public class AuthenticateController extends AbstractController {
         String password = loginForm.getPassword();
 
         if (theUser == null) {
-            errors.rejectValue("email", "email.invalid", "The given email is not linked to an account.");
+
+            errors.rejectValue("email", "email.invalid",
+                    "The given email is not linked to an account.");
             model.addAttribute("sessionActive", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
+
             return "authenticate/login";
         }
 
         if (!theUser.isMatchingPassword(password)) {
+
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("sessionActive", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
+
             return "authenticate/login";
         }
 

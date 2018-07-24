@@ -2,29 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
-
 <center><h1 th:text="${title}" style="padding-top:100px">Default Title</h1></center>
 
 <div th:replace="fragments :: page-header"></div>
 
-<form th:object="${editForm}" method="post" style="max-width:500px;">
+<form method="post" style="max-width:500px;" th:object="${editPlayDateForm}" >
 
     <div class="form-group">
-        <label th:for="name">Name: </label>
-        <input th:field="*{name}" class="input" th:errorclass="error"/>
-        <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}">Incorrect Name</div>
+        <label th:for="date">Date: </label>
+        <input class="form-control" type="datetime-local" min="2018-07-19 12:00" max="2019-07-20" value="MM/DD/YYYY HH:MM"
+               th:field="*{date}" th:errorclass="error" />
+        <div th:if="${#fields.hasErrors('date')}" class="error" th:errors="*{date}">Incorrect Date</div>
     </div>
 
     <div class="form-group">
-        <label th:for="description">Description: </label>
-        <p><textarea name="message" rows="5" cols="50" th:field="*{description}"></textarea></p>
-        <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">
-            Description cannot exceed 250 characters.</div>
-
-    </div>
-
-    <div class="form-group">
-        <label th:for="dogParkLocation">Dog Parks: </label>
+        <label th:for="dogParkLocation">Playdate Location: </label>
         <select th:field="*{dogParkLocation}">
             <option th:value="BLUE_DOG_POND">Blue Dog Park</option>
             <option th:value="DENNY_PARK">Denny Park</option>
@@ -41,6 +33,13 @@
             <option th:value="WESTCREST_PARK">Westcrest Park</option>
             <option th:value="WOODLAND_PARK">Woodland Park</option>
         </select>
+    </div>
+
+    <div class="form-group">
+        <label th:for="description">Message: </label>
+        <p><textarea name="message" rows="10" cols="30" th:field="*{description}" th:errorclass="error" ></textarea></p>
+        <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">
+            Incorrect Description</div>
     </div>
 
     <input type="submit" value="Update" />

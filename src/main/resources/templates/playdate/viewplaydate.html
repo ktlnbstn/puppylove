@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<center><h1 th:text="${title}" style="padding-top:100px">Default Title</h1></center>
+
+<div th:replace="fragments :: page-header" th:object="${playDate}"></div>
+
+<center><h2>Playdate Info</h2></center>
+
+<div class="form-group">
+    <label th:for="users">Invited Puppy Owners: </label>
+    <p th:each="user : ${playDate.users}" th:text="${user.name}"></p>
+</div>
+
+<div class="form-group">
+    <label th:for="date">Date: </label>
+    <p th:text="${#dates.format(playDate.date, 'MM/dd/yyyy, hh:mm a')}"> </p>
+</div>
+
+<div class="form-group">
+    <label th:for="dogParkLocation"> Playdate Location: </label>
+    <p th:text="${playDate.dogParkLocation}"></p>
+</div>
+
+<div class="form-group">
+    <label th:for="description">Message: </label>
+    <p th:text="${playDate.description}"></p>
+</div>
+
+<a th:href="@{/playdate/editplaydate/{pid}(pid=${playDate.id})}">Edit Playdate</a>
+
+</body>
+</html>

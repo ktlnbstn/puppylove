@@ -1,7 +1,7 @@
 package org.ktlnbstn.puppylove.models.data;
 
-import org.hibernate.validator.internal.constraintvalidators.bv.size.SizeValidatorForArraysOfLong;
 import org.ktlnbstn.puppylove.models.DogParks;
+import org.ktlnbstn.puppylove.models.PlayDate;
 import org.ktlnbstn.puppylove.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -11,9 +11,8 @@ import java.util.ArrayList;
 
 @Repository
 @Transactional
-public interface UserDao extends CrudRepository<User, Integer> {
+public interface PlayDateDao extends CrudRepository<PlayDate, Integer> {
 
-    User findByEmail(String email);
+    PlayDate findById(Integer id);
 
-    ArrayList<User> findByDogParkLocation(DogParks dogParkLocation);
 }

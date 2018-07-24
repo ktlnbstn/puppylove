@@ -3,6 +3,8 @@ package org.ktlnbstn.puppylove.models;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
@@ -12,68 +14,71 @@ public class User {
 
     @Id
     @GeneratedValue
-    int id;
+    private int id;
 
     @NotNull
     @Size(min = 2, max = 25, message = "Name must be between 2 and 25 characters")
-    String name;
+    private String name;
 
     @Email
     @Size(min = 1, message = "Invalid email")
-    String email;
+    private String email;
 
     @NotNull
     private String pwHash;
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @NotNull
-    int age;
+    @Max(value=99, message = "Please enter an age between 18-99")
+    @Min(value=18, message = "Please enter an age between 18-99")
+    private int age;
 
     @NotNull
-    @Size(min = 0, max = 250)
-    String description;
+    @Size(min = 0, max = 250, message = "Description cannot exceed 250 characters.")
+    private String description;
 
     @NotNull
-    @Size(min = 0, max = 25)
-    String location;
+    private DogParks dogParkLocation;
 
     public User() {
     }
 
-    public User(String name, int age, String email, String password) {
+    public User(String name, int age, String email, String password, DogParks dogParkLocation) {
         this.name = name;
         this.age = age;
         this.email = email;
         this.pwHash = hashPassword(password);
         this.description = "";
-        this.location = "";
+        this.dogParkLocation = dogParkLocation;
     }
 
     @OneToMany
     @JoinTable(name = "user_puppy",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "puppy_id", referencedColumnName = "id"))
-
     private Set<Puppy> puppies;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_playdate",
             joinColumns =  @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "playdate_id", referencedColumnName = "id"))
+    private Set<PlayDate> playdates = new TreeSet<>();
 
-    private Set<PlayDate> playDates;
-
-    public Set<PlayDate> getPlayDates(){ return playDates; }
-
-    public void setPlayDates(Set<PlayDate> playDates){
-        this.playDates = playDates;
+    public Set<PlayDate> getPlaydates(){
+        return playdates;
     }
 
-    public String getLocation() { return location; }
+    public void addPlaydate(PlayDate playdate) {
+        this.playdates.add(playdate);
+    }
 
-    public void setLocation(String location) { this.location = location; }
+    public void setPlaydates(Set<PlayDate> playdates){
+        this.playdates = playdates;
+    }
 
-    public Set<Puppy> getPuppies(){ return this.puppies; }
+    public Set<Puppy> getPuppies(){
+        return this.puppies;
+    }
 
     public void setPuppies(Set<Puppy> puppies) {
         this.puppies = puppies;
@@ -130,5 +135,14 @@ public class User {
     public void removePuppy(Puppy puppy) {
         this.puppies.remove(puppy);
     }
+
+    public DogParks getDogParkLocation() {
+        return dogParkLocation;
+    }
+
+    public void setDogParkLocation(DogParks dogParkLocation) {
+        this.dogParkLocation = dogParkLocation;
+    }
+
 }
 

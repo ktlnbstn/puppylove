@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<center><h1 th:text="${title}" style="padding-top:100px">Default Title</h1></center>
+
+<div th:replace="fragments :: page-header"></div>
+
+<form method="post" style="max-width:600px;" th:object="${editPuppy}">
+
+    <div class="form-group">
+        <label th:for="name">Name: </label>
+        <input class="form-control" th:field="*{name}" />
+        <div th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}">Incorrect Name</div>
+    </div>
+
+    <div class="form-group">
+        <label th:for="size">Size: </label>
+        <select class="form-control" th:field="*{size}">
+            <option th:value="Small">Small (less than 15 lbs)</option>
+            <option th:value="Medium">Medium (16-35 lbs)</option>
+            <option th:value="Large">Large (greater than 36 lbs)</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label th:for="description">Description: </label>
+        <p><textarea name="message" rows="10" cols="30" th:field="*{description}" th:errorclass="error" ></textarea></p>
+        <div th:if="${#fields.hasErrors('description')}" class="error" th:errors="*{description}">
+            Incorrect Description</div>
+    </div>
+
+    <input type="submit" value="Add New Puppy Details" />
+
+</form>
+
+</body>
+</html>
