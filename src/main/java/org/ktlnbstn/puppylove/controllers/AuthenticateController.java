@@ -60,7 +60,7 @@ public class AuthenticateController extends AbstractController {
 
             model.addAttribute("title", "Register");
             model.addAttribute("sessionActive", isSessionActive(request.getSession()));
-            model.addAttribute("registerForm", "registerForm");
+            model.addAttribute("registerForm", registerForm);
             model.addAttribute("existingError", "Email already registered.");
 
             return "authenticate/register";
